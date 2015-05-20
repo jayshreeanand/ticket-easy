@@ -34,3 +34,6 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 
 # Use Rails12Factor to configure app to serve static assets
 gem 'rails_12factor', group: :production
+
+# Use Byebug for debugging
+gem 'byebug', group: :development
