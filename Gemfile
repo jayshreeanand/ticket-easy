@@ -28,3 +28,6 @@ gem 'spring',        group: :development
 
 # Using devise for authentication
 gem 'devise'
+
+# Using ActiveAdmin for admin dashboard
+gem 'activeadmin', github: 'gregbell/active_admin'
