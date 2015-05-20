@@ -37,3 +37,8 @@ gem 'rails_12factor', group: :production
 
 # Use Byebug for debugging
 gem 'byebug', group: :development
+
+# Use Twitter Bootstrap
+gem "therubyracer"
+gem "less-rails"
+gem 'twitter-bootstrap-rails'
