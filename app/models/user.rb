@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :bookings
   has_many :events, :through => :bookings
+
+  GENDER_TYPES = ["Not telling","Male", "Female"]
 end

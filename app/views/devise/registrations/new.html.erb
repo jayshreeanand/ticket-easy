@@ -4,8 +4,13 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email %>
   </div>
 
   <div class="field">
@@ -20,6 +25,15 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.select(:gender, options_for_select([['Male', 'M'], ['Female', 'F'], ['Do not wish to specify', 'N']], :gender), {:prompt => 'Select Gender'})%>
+  </div>
+
+  <%= f.select "default_payment_method_id", options_for_select(@site.get_payment_types, @site.default_payment_method_id) %
+
+
 
   <div class="actions">
     <%= f.submit "Sign up" %>
