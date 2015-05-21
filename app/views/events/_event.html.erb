@@ -10,17 +10,17 @@
         <p>₹ <%= event.price.to_f %></p>
       </div>
       <div class="ratings">
-        <% if current_user.attending? event  %>
-          <%= form_tag({:action => 'unattend'}, :method => :post) do %>
-            <%= hidden_field_tag :id , event.id %>
-            <%= submit_tag 'Unattend' %>
+          <% if ((current_user.present?) && (current_user.attending? event))  %>
+            <%= form_tag({:action => 'unattend'}, :method => :post) do %>
+              <%= hidden_field_tag :id , event.id %>
+              <%= submit_tag 'Unattend' %>
+            <% end %>
+          <% else %>
+            <%= form_tag({:action => 'attend'}, :method => :post) do %>
+              <%= hidden_field_tag :id , event.id %>
+              <%= submit_tag 'Attend' %>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= form_tag({:action => 'attend'}, :method => :post) do %>
-            <%= hidden_field_tag :id , event.id %>
-            <%= submit_tag 'Attend' %>
-          <% end %>
-        <% end %>
         <p><%= event.venue %></p>
       </div>
     </div>
