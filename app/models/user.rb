@@ -6,5 +6,9 @@ class User < ActiveRecord::Base
   has_many :bookings
   has_many :events, :through => :bookings
 
-  GENDER_TYPES = ["Not telling","Male", "Female"]
+
+  def attending?(event)
+    Booking.exists?(user: self, event: event, attending: true)
+  end
+
 end

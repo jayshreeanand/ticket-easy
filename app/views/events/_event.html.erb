@@ -9,11 +9,22 @@
         <p><%= event.description %></p>
       </div>
       <div class="ratings">
-        <p><%= link_to "Attend", :action => :attend , :params => {:id => event.id}%></p>
+        <% if current_user.attending? event  %>
+          <%= form_tag({:action => 'unattend'}, :method => :post) do %>
+            <%= hidden_field_tag :id , event.id %>
+            <%= submit_tag 'Unattend' %>
+          <% end %>
+        <% else %>
+          <%= form_tag({:action => 'attend'}, :method => :post) do %>
+            <%= hidden_field_tag :id , event.id %>
+            <%= submit_tag 'Attend' %>
+          <% end %>
+        <% end %>
         <p><%= event.venue %></p>
       </div>
     </div>
   </div>
 </div>
+
 
 

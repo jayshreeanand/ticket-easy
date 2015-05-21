@@ -62,25 +62,28 @@ class EventsController < ApplicationController
   end
 
   def attend
-    @event.add_user_to_event(current_user)
-    booking = Booking.new
-    booking.user = current_user
-    booking.event = @event
-    if booking.save!
-      redirect_to({action: 'index'}, notice: 'Event booking successfully created')
+    respond_to do |format|
+      if @event.register(current_user)
+        format.html { redirect_to events_url, notice: 'Event booking successfully created.' }
+        format.json { render events_url, status: :ok }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
-
   end
 
   def unattend
-    booking = Booking.where(user: current_user, event: @event ).first
-    booking.attending = false
-    booking.save!
-    if booking.save!
-      redirect_to({action: 'index'}, notice: 'Event booking successfully cancelled')
+    respond_to do |format|
+      if @event.unregister(current_user)
+        format.html { redirect_to events_url, notice: 'Event booking successfully cancelled.' }
+        format.json { render events_url, status: :ok }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

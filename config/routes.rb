@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :events do
     collection do
-      get :attend
-      get :unattend
+      post :attend
+      post :unattend
     end
   end
 
