@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.order('created_at ASC').paginate(:page => params[:page], :per_page => 9)
   end
 
   # GET /events/1
@@ -62,6 +62,7 @@ class EventsController < ApplicationController
   end
 
   def attend
+    @event.add_user_to_event(current_user)
     booking = Booking.new
     booking.user = current_user
     booking.event = @event

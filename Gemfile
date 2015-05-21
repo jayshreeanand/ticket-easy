@@ -42,3 +42,6 @@ gem 'byebug', group: :development
 gem "therubyracer"
 gem "less-rails"
 gem 'twitter-bootstrap-rails'
+
+# Use WillPaginate for pagination
+gem 'will_paginate'

@@ -1,25 +1,8 @@
-<h1>Events</h1>
-
-
-    <% @events.each_with_index do |event, i| %>
-      <div class="col-sm-4 col-lg-4 col-md-4">
-        <div class="thumbnail">
-          <img src="http://lorempixel.com/320/150/sports/<%= i % 11 %>" alt="">
-          <div class="caption">
-            <h4 class="pull-right"><%= event.start_time.strftime("%b %d") %></h4>
-            <h4><%= link_to event.name, event %>
-            </h4>
-            <p><%= event.description %></p>
-          </div>
-          <div class="ratings">
-            <p><%= link_to "Attend", :action => :attend , :params => {:id => event.id}%></p>
-            <p><%= event.venue %></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  
-
+<div id="events">
+  <h1>Events</h1>
+  <%= render @events %>
+</div>
+<%= will_paginate @events %>
 
 
     
