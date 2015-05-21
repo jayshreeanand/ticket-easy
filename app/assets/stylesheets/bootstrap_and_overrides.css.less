@@ -1,5 +1,6 @@
 @import "twitter/bootstrap/bootstrap";
 
+
 // Set the correct sprite paths
 @iconSpritePath: image-url("twitter/bootstrap/glyphicons-halflings.png");
 @iconWhiteSpritePath: image-url("twitter/bootstrap/glyphicons-halflings-white.png");
@@ -13,6 +14,7 @@
 
 // Font Awesome
 @import "fontawesome/font-awesome";
+@fa-font-path: "/assets"; // Override fontawesome less variable in order for it to work with Rails asset pipeline 
 
 // Glyphicons
 //@import "twitter/bootstrap/glyphicons.less";

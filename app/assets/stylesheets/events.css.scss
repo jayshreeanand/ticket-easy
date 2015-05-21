@@ -6,23 +6,36 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
+.event-box {
+  margin-bottom: 30px;
 
+  .thumbnail {
+    background-color: #FEFEFE;
+  }
 
-
-.thumbnail img {
-    width: 100%;
+}
+a:hover {
+  text-decoration: none;
 }
 
-
-.thumbnail {
-    padding: 0;
-}
-
-.thumbnail .caption-full {
-    padding: 9px;
-    color: #333;
-}
 
 footer {
     margin: 50px 0;
+}
+
+.event-title {
+  display: block;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+.markers {
+  color: #CCC;
+  margin-right: 5px;
+  font-size: 15px;
+}
+.event-description {
+  display: block;
+  height: 50px;
+  margin-bottom: 5px;
 }

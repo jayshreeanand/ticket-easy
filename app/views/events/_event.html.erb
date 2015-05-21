@@ -1,31 +1,26 @@
 <div class="event">
-  <div class="col-sm-4 col-lg-4 col-md-4">
+  <div class="col-md-3 col-sm-6 event-box">
     <div class="thumbnail">
-      <img src="http://lorempixel.com/320/150/sports/<%= event.id % 11 %>" alt="">
+      <img src="http://lorempixel.com/800/500/sports/<%= event.id % 11 %>" alt="">
       <div class="caption">
-        <h4 class="pull-right"><%= event.start_time.strftime("%b %d") %></h4>
-        <h4><%= link_to event.name, event %>
-        </h4>
-        <p><%= event.description %></p>
+        <h3 class="event-title"><%= link_to event.name, event %></h3>
+        <h4><%= event.start_time.strftime("%b %d") %></h4>
+        <p class="event-description"><%= event.description %></p>
         <p>₹ <%= event.price.to_f %></p>
-      </div>
-      <div class="ratings">
-          <% if ((current_user.present?) && (current_user.attending? event))  %>
+        <p><i class="fa fa-map-marker markers"></i><%= event.venue %>
+        <p><% if ((current_user.present?) && (current_user.attending? event))  %>
             <%= form_tag({:action => 'unattend'}, :method => :post) do %>
               <%= hidden_field_tag :id , event.id %>
-              <%= submit_tag 'Unattend' %>
+              <%= submit_tag 'Unattend', {:class => "btn btn-danger"} %>
             <% end %>
           <% else %>
             <%= form_tag({:action => 'attend'}, :method => :post) do %>
               <%= hidden_field_tag :id , event.id %>
-              <%= submit_tag 'Attend' %>
+              <%= submit_tag 'Attend', {:class => "btn btn-primary"} %>
             <% end %>
           <% end %>
-        <p><%= event.venue %></p>
+        </p>  
       </div>
     </div>
   </div>
 </div>
-
-
-
