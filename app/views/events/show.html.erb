@@ -23,4 +23,13 @@
   <%= @event.venue %>
 </p>
 
+<p>
+  <strong>This event is being attended by:</strong>
+  <% @event.bookings.each do |a| %>
+     <p>Name: <%= a.user.email %> Gender: <%= a.user.gender %></p>
+  <% end %>
+</p>
+
+
+
 

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :attend, :unattend]
 
   # GET /events
   # GET /events.json
@@ -60,6 +60,26 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def attend
+    booking = Booking.new
+    booking.user = current_user
+    booking.event = @event
+    if booking.save!
+      redirect_to({action: 'index'}, notice: 'Event booking successfully created')
+    end
+
+  end
+
+  def unattend
+    booking = Booking.where(user: current_user, event: @event ).first
+    booking.attending = false
+    booking.save!
+    if booking.save!
+      redirect_to({action: 'index'}, notice: 'Event booking successfully cancelled')
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
