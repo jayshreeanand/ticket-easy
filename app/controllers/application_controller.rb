@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_admin_user!
-    redirect_to new_user_session_path unless current_user.admin?
+    if !current_user.present? || !current_user.admin?
+      redirect_to new_user_session_path 
+    end
   end
 
   protected
@@ -14,5 +16,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << :name << :gender
     devise_parameter_sanitizer.for(:account_update) << :name << :gender
   end
+
 
 end
