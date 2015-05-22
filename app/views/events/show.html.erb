@@ -29,15 +29,20 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 text-left">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info ">
         <h4 class="list-group-item-heading">Event also attended by</h4>
       </li>
       <% @event.bookings.each do |b| %>
       <li class="list-group-item">
-        <span class="gender-icon"><%= b.user.gender%></span>
-        <%= b.user.name %>
+        <div class= "row">
+          <div class="col-md-3">
+            <div class="gender-<%= b.user.gender %>"></div>
+          </div>
+          <div class="col-md-9">
+            <%= b.user.name %>
+          </div>
       </li>
       <% end %>
     </div>
