@@ -7,7 +7,14 @@
         <h4><%= @event.start_time.strftime("%b %d") %></h4>
         <p><%= @event.duration %> minutes</p>
         <p class="event-description"><%= @event.description %></p>
-        <p>₹ <%= @event.price.to_f %></p>
+        <% if current_user.present? && current_user.gender == "F" %>
+          <h5>
+            <s class="old-price">₹<%= @event.price.to_f %></s>&nbsp;&nbsp;&nbsp;  ₹ <%= (@event.price*0.95).to_f %>
+            <i class="fa fa-info-circle discount-tip" data-toggle="tooltip" data-placement="left" title="5% discount for women"></i>
+          </h5>
+        <% else %>
+          <h5>₹ <%= @event.price.to_f %></h5>
+        <% end %>
         <p><i class="fa fa-map-marker markers"></i><%= @event.venue %></p>
         <% if @event.valid? %>
         <p>
