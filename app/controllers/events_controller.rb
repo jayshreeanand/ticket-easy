@@ -5,7 +5,14 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
+    case params[:filter]
+    when "Past"
+      @events = Event.where('start_time < ?', DateTime.now).order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
+    when "Future"
+      @events = Event.where('start_time > ?', DateTime.now).order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
+    else
+      @events = Event.order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
+    end
   end
 
   # GET /events/1

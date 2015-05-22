@@ -1,3 +1,8 @@
+<div class= "container">
+  <%= form_tag(events_path, :method => :get) do %>
+    <%= select_tag(:filter, options_for_select(["Future","Past","All"]), {:prompt => "Filter Events", onchange: "this.form.submit();", :class => "form-control filter-bar dropdown-toggle"})%>
+  <% end %>
+</div>
 <div id="events">
   <%= render @events %>
 </div>
