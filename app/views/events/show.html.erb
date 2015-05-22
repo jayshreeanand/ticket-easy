@@ -1,34 +1,49 @@
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+<div class="row">
+  <div class="col-md-9">
+    <img class="col-md-12" src="http://lorempixel.com/900/300/sports/<%= @event.id % 11 %>" alt="">
+    <div class="col-md-12">
+      <div class="well">
+        <h3><%= link_to @event.name, @event %></h3>
+        <h4><%= @event.start_time.strftime("%b %d") %></h4>
+        <p><%= @event.duration %> minutes</p>
+        <p class="event-description"><%= @event.description %></p>
+        <p>₹ <%= @event.price.to_f %></p>
+        <p><i class="fa fa-map-marker markers"></i><%= @event.venue %></p>
+        <% if @event.valid? %>
+        <p>
+          <% if ((current_user.present?) && (current_user.attending? @event))  %>
+            <%= form_tag({:action => 'unattend'}, :method => :post) do %>
+              <%= hidden_field_tag :id , @event.id %>
+              <%= submit_tag 'Unattend', {:class => "btn btn-danger"} %>
+            <% end %>
+          <% else %>
+            <%= form_tag({:action => 'attend'}, :method => :post) do %>
+              <%= hidden_field_tag :id , @event.id %>
+              <%= submit_tag 'Attend', {:class => "btn btn-primary"} %>
+            <% end %>
+          <% end %>
+        </p>
+        <% else %>
+        <p class="past-event">This is a past event. Registrations closed.</p>
+        <% end %>  
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info ">
+        <h4 class="list-group-item-heading">Event also attended by</h4>
+      </li>
+      <% @event.bookings.each do |b| %>
+      <li class="list-group-item">
+        <span class="gender-icon"><%= b.user.gender%></span>
+        <%= b.user.name %>
+      </li>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @event.start_time %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @event.duration %>
-</p>
-
-<p>
-  <strong>Venue:</strong>
-  <%= @event.venue %>
-</p>
-
-<p>
-  <strong>This event is being attended by:</strong>
-  <% @event.bookings.each do |a| %>
-     <p>Name: <%= a.user.name %> Gender: <%= a.user.gender %></p>
-  <% end %>
-</p>
 
 
 

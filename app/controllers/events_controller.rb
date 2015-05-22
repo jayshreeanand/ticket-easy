@@ -5,14 +5,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    case params[:filter]
-    when "Past"
-      @events = Event.where('start_time < ?', DateTime.now).order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
-    when "Future"
-      @events = Event.where('start_time > ?', DateTime.now).order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
-    else
-      @events = Event.order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
+    @events = Event.all
+    if params[:filter] == "Past"
+      @events = @events.where('start_time < ?', DateTime.now)
+    elsif params[:filter] =="Future"
+      @events = @events.where('start_time > ?', DateTime.now)
     end
+    @events = @events.order('created_at ASC').paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /events/1
@@ -72,8 +71,8 @@ class EventsController < ApplicationController
   def attend
     respond_to do |format|
       if @event.register(current_user)
-        format.html { redirect_to events_url, notice: 'Event booking successfully created.' }
-        format.json { render events_url, status: :ok }
+        format.html { redirect_to my_events_path, notice: 'Event booking successfully created.' }
+        format.json { render my_events_path, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -84,8 +83,8 @@ class EventsController < ApplicationController
   def unattend
     respond_to do |format|
       if @event.unregister(current_user)
-        format.html { redirect_to events_url, notice: 'Event booking successfully cancelled.' }
-        format.json { render events_url, status: :ok }
+        format.html { redirect_to my_events_path, notice: 'Event booking successfully cancelled.' }
+        format.json { render my_events_path, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -94,7 +93,7 @@ class EventsController < ApplicationController
   end
 
   def user_events
-    @events = current_user.bookings.includes(:event).collect{ |b| b.event }
+    @events = current_user.bookings.includes(:event).where(attending: true).collect{ |b| b.event }
     @events.sort_by!{|e| e[:start_time]} #sorting user's events for display
   end
 

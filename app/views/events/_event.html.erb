@@ -9,7 +9,8 @@
         <p>₹ <%= event.price.to_f %></p>
         <p><i class="fa fa-map-marker markers"></i><%= event.venue %>
         <% if event.valid? %>
-          <p><% if ((current_user.present?) && (current_user.attending? event))  %>
+          <p>
+            <% if ((current_user.present?) && (current_user.attending? event))  %>
               <%= form_tag({:action => 'unattend'}, :method => :post) do %>
                 <%= hidden_field_tag :id , event.id %>
                 <%= submit_tag 'Unattend', {:class => "btn btn-danger"} %>

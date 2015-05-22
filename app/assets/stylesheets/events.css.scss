@@ -23,8 +23,8 @@ body {
     display: block;
     min-height: 450px;
   }
-
 }
+
 a:hover {
   text-decoration: none;
 }
@@ -32,11 +32,10 @@ a:hover {
 .past-event {
   color: #f78066;
   font-size: 13px;
-
 }
 
 footer {
-    margin: 50px 0;
+  margin: 50px 0;
 }
 
 .event-title {
@@ -50,6 +49,7 @@ footer {
   margin-right: 5px;
   font-size: 15px;
 }
+
 .event-description {
   display: block;
   height: 50px;
@@ -64,9 +64,10 @@ footer {
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: white;
+  color: white;
 }
 
 .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
   color: white;
 }
+

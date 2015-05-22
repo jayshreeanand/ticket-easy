@@ -75,3 +75,14 @@
   text-align: left;
   margin-bottom: 10px;
 }
+
+.gender-icon {
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  min-height: 50px;
+  min-width: 50px;
+  background-color: #38ccb9;
+  font-size: 40px;
+}
+
