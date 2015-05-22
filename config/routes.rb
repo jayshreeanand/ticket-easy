@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       post :unattend
     end
   end
+  get 'my_events' => 'events#user_events'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

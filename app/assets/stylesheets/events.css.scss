@@ -6,6 +6,7 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
+
 .navbar-nav > li > strong{
   padding-top: 15px;
   padding-bottom: 15px;
@@ -20,7 +21,7 @@ body {
     background-color: #FEFEFE;
     height: 450px;
     display: block;
-
+    min-height: 450px;
   }
 
 }

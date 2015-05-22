@@ -93,6 +93,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def user_events
+    @events = current_user.bookings.includes(:event).collect{ |b| b.event }
+    @events.sort_by!{|e| e[:start_time]} #sorting user's events for display
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
