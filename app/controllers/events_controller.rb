@@ -74,7 +74,7 @@ class EventsController < ApplicationController
         format.html { redirect_to my_events_path, notice: 'Event booking successfully created.' }
         format.json { render my_events_path, status: :ok }
       else
-        format.html { render :edit }
+        format.html { render :show }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -83,10 +83,10 @@ class EventsController < ApplicationController
   def unattend
     respond_to do |format|
       if @event.unregister(current_user)
-        format.html { redirect_to my_events_path, notice: 'Event booking successfully cancelled.' }
+        format.html { redirect_to my_events_path, notice: 'Event booking successfully cancelled.'}
         format.json { render my_events_path, status: :ok }
       else
-        format.html { render :edit }
+        format.html { render :show }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
