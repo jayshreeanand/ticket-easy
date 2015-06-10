@@ -45,3 +45,7 @@ gem 'twitter-bootstrap-rails'
 
 # Use WillPaginate for pagination
 gem 'will_paginate'
+
+group :development, :test do
+  gem 'faker'
+end
